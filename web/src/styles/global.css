@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;700;800&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    color: white;
+    background-color: #ebf2f5;
+}
+
+body, input, button, textarea {
+    font: 600 18px 'Nunito Sans', sans-serif;
+}
