@@ -40,7 +40,7 @@
     font-weight: 800;
 }
 
-#page-map .crate-orphanage {
+#page-map .create-orphanage {
     position: absolute;
 
     right: 40px;
@@ -61,4 +61,9 @@
 
 #page-map .create-orphanage:hover {
     background: #17d6eb;
+}
+
+.mapa {
+    height: 100%;
+    width: 100%;
 }
