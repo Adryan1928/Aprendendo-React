@@ -29,21 +29,21 @@ function OrphanegesMap () {
                     <span>Antônio Martins</span>
                 </footer>
             </aside>
-<MapContainer center={position as LatLngExpression}  zoom={13} className="mapa" scrollWheelZoom={false}>
-    <TileLayer
-      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    />
-    <Marker position={position as LatLngExpression}>
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      </Popup>
-    </Marker>
-  </MapContainer>
+                <MapContainer center={position as LatLngExpression}  zoom={13} className="mapa" scrollWheelZoom={false}>
+                    <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={position as LatLngExpression}>
+                        <Popup>
+                            Luiz
+                        </Popup>
+                    </Marker>
+                </MapContainer>
 
-            <Link to='' className="create-orphanage">
-                <FiPlus size={32}  color="#fff"/>
-            </Link>
+                <Link to='' className="create-orphanage">
+                                <FiPlus size={32}  color="#fff"/>
+                </Link>
         </div>
     )
 }
