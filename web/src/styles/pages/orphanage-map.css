@@ -73,3 +73,24 @@
 #page-map .leaflet-container {
     z-index: 5;
 }
+
+#page-map .map-popup .leaflet-popup-content-wrapper {
+    background: rgba(255, 255, 255, 0.806);
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+#page-map .map-popup .leaflet-popup-content{
+    color: 0089a5;
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 8px 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#page-map .map-popup .leaflet-popup-content-wrapper a {
+    
+}
