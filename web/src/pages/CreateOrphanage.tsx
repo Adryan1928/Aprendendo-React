@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { MapContainer, Marker, TileLayer,  } from 'react-leaflet';
-import L, { LeafletMouseEvent } from 'leaflet';
+import { MapContainer, Marker, TileLayer, useMapEvents,   } from 'react-leaflet';
+import L, { LatLngExpression, LeafletMouseEvent } from 'leaflet';
+import { useNavigate } from "react-router-dom";
 
 import { FiPlus } from "react-icons/fi";
 
@@ -33,10 +34,21 @@ export default function CreateOrphanage() {
   function handleMapClick(event: LeafletMouseEvent) {
     const { lat, lng } = event.latlng;
 
-    setPosition({
-      latitude: lat,
-      longitude: lng,
+    
+  }
+
+  function MyComponent() {
+    const map = useMapEvents({
+      click: (e) => {
+        const { lat, lng } = e.latlng;
+        setPosition({
+          latitude: lat,
+          longitude: lng,
+        });
+        // L.marker([lat, lng], {  }).addTo(map);
+      }
     });
+    return null;
   }
 
   function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
@@ -58,6 +70,14 @@ export default function CreateOrphanage() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
+    console.log ({
+      instructions,
+      name,
+      position,
+      about,
+      opening_hours
+    })
+
     const { latitude, longitude} = position;
 
     const data = new FormData();
@@ -78,7 +98,9 @@ export default function CreateOrphanage() {
 
     alert('Cadastro realizado com sucesso!');
 
-    // history.push('/app');
+    
+
+    // // history.push('/app');
   }
 
   return (
@@ -86,45 +108,57 @@ export default function CreateOrphanage() {
       <Sidebar/>
 
       <main>
-        <form className="create-orphanage-form">
+        <form onSubmit={handleSubmit} className="create-orphanage-form">
           <fieldset>
             <legend>Dados</legend>
 
             <MapContainer 
-              center={[-27.2092052,-49.6401092]} 
+              center={[-6.1029454,-38.1582802]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
-              closePopupOnClick
+              // onClick = {handleMapClick} as LatLngExpression
               // closePopupOnClick = {handleMapClick} 
             >
               <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-
-              <Marker interactive={false} icon={happyMapIcon} position={[-27.2092052,-49.6401092]} />
+              <MyComponent/>
+              { position.latitude != 0 ? 
+              <Marker interactive={false} icon={happyMapIcon} position={[position.latitude,position.longitude]} />
+              : 
+              null
+              }
+              {/* <Marker interactive={false} icon={happyMapIcon} position={[-27.2092052,-49.6401092]} /> */}
             </MapContainer>
 
             <div className="input-block">
               <label htmlFor="name">Nome</label>
-              <input id="name" />
+              <input id="name" value={name} onChange={event => setName(event.target.value)}  />
             </div>
 
             <div className="input-block">
               <label htmlFor="about">Sobre <span>Máximo de 300 caracteres</span></label>
-              <textarea id="name" maxLength={300} />
+              <textarea id="name" maxLength={300} value={about} onChange={event => setAbout(event.target.value)} />
             </div>
 
             <div className="input-block">
               <label htmlFor="images">Fotos</label>
 
-              <div className="uploaded-image">
+              <div className="images-container">
+                {previewImages.map(image => {
+                  return (
+                    <img key={image} alt={name} />
+                  )
+                })}
 
+                <label htmlFor="image[]" className="new-image">
+                  <FiPlus size={24} color="#15b6d6" />
+                </label>
               </div>
+              <input multiple onChange={handleSelectImages} type="file" id="image[]" />
 
-              <button className="new-image">
-                <FiPlus size={24} color="#15b6d6" />
-              </button>
+              
             </div>
           </fieldset>
 
@@ -133,20 +167,22 @@ export default function CreateOrphanage() {
 
             <div className="input-block">
               <label htmlFor="instructions">Instruções</label>
-              <textarea id="instructions" />
+              <textarea id="instructions" value={instructions} onChange={event => setInstructions(event.target.value)} />
             </div>
 
             <div className="input-block">
-              <label htmlFor="opening_hours">Nome</label>
-              <input id="opening_hours" />
+              <label htmlFor="opening_hours">Horário de funcionamento</label>
+              <input id="opening_hours" value={opening_hours} onChange={event => setOpeningHours(event.target.value)} />
             </div>
 
             <div className="input-block">
-              <label htmlFor="open_on_weekends">Atende fim de semana</label>
+              <label htmlFor="open_on_weekends" >Atende fim de semana</label>
 
               <div className="button-select">
-                <button type="button" className="active">Sim</button>
-                <button type="button">Não</button>
+                <button type="button" className={open_on_weekends ? 'active': ''}  onClick={() => setOpenOnWeekends(true)}>Sim</button>
+
+
+                <button type="button" className={!open_on_weekends ? 'active' : ''} onClick={() => setOpenOnWeekends(false)} >Não</button>
               </div>
             </div>
           </fieldset>
