@@ -5,29 +5,26 @@ import { Feather } from '@expo/vector-icons'
 import  MapMarker from '../images/map-marker.png';   
 import { useNavigation } from "@react-navigation/native";
 
-import { useFonts } from 'expo-font';
-import { Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold } from '@expo-google-fonts/nunito';
+// import { useFonts } from 'expo-font';
+// import { Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold } from '@expo-google-fonts/nunito';
 
 
 
 export default function OrphanagesMap () {
-    const [fontsLoaded] = useFonts({
-        Nunito_600SemiBold, 
-        Nunito_700Bold, 
-        Nunito_800ExtraBold
-      })
+    // const [fontsLoaded] = useFonts({
+    //     Nunito_600SemiBold, 
+    //     Nunito_700Bold, 
+    //     Nunito_800ExtraBold
+    //   })
     
-      if (!fontsLoaded){
-        return null;
-      }
+    //   if (!fontsLoaded){
+    //     return null;
+    //   }
 
 
     const navigation = useNavigation();
-
-    const tela = "Orphanagedetails"
-
     function handleNavigateToOrphanageDetails () {
-        navigation.navigate('OrphanageDetails', { id })
+        navigation.navigate("OrphanageDetails" as never)
     }
 
     return (

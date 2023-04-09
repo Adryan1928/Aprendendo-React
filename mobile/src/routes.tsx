@@ -19,7 +19,7 @@ export default function Routes(){
             <Navigator screenOptions={{headerShown: false}} >
                 <Screen name='OrphanagesMap' component={OrphanagesMap} />
                 <Screen name='OrphanageDetails' component={OrphanageDetails}/>
-
+                Screen
             </Navigator>
         </NavigationContainer>
     )
