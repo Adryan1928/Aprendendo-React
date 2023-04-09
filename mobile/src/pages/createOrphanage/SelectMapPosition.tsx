@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
@@ -31,9 +31,9 @@ export default function SelectMapPosition() {
         />
       </MapView>
 
-      <RectButton style={styles.nextButton} onPress={handleNextStep}>
+      <TouchableOpacity style={styles.nextButton} onPress={handleNextStep}>
         <Text style={styles.nextButtonText}>Próximo</Text>
-      </RectButton>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
 
   nextButtonText: {
-    fontFamily: 'Nunito_800ExtraBold',
+    // fontFamily: 'Nunito_800ExtraBold',
     fontSize: 16,
     color: '#FFF',
   }
